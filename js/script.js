@@ -82,6 +82,12 @@ const drawing = (e) => {
     case 'triangle':
       drawTriangle(e);
       break;
+    case 'eraser':
+      const isEraser = selectedTool === 'eraser' ? '#fff' : selectedColor;
+      ctx.strokeStyle = isEraser;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      break;
     default:
       break;
   }
