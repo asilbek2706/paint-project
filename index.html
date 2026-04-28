@@ -8,10 +8,18 @@
   </head>
   <body>
     <div class="container">
+      <button
+        class="sidebar-toggle"
+        aria-expanded="false"
+        aria-controls="tools-board"
+        title="Open tools"
+      >
+        ☰
+      </button>
       <section class="drawing-board">
         <canvas id="canvas"></canvas>
       </section>
-      <section class="tools-board">
+      <section class="tools-board" id="tools-board">
         <div class="row">
           <label class="title">Shakllar</label>
           <ul class="options">
