@@ -1,6 +1,7 @@
 const canvas = document.querySelector('#canvas'),
   toolBtns = document.querySelectorAll('.tool'),
-  fillColor = document.querySelector('#fill-color');
+  fillColor = document.querySelector('#fill-color'),
+  sizeSlider = document.querySelector('#size-slider');
 
 let ctx = canvas.getContext('2d'),
   isDrawing = false,
@@ -23,8 +24,6 @@ const startDraw = (e) => {
   ctx.lineWidth = brushWidth;
   snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
 };
-
-const stopDraw = () => (isDrawing = false);
 
 const drawRectangle = (e) => {
   fillColor.checked
@@ -90,6 +89,10 @@ toolBtns.forEach((btn) => {
     selectedTool = btn.id;
   });
 });
+
+sizeSlider.addEventListener('change', () => (brushWidth = sizeSlider.value));
+
+const stopDraw = () => (isDrawing = false);
 
 canvas.addEventListener('mousedown', startDraw);
 canvas.addEventListener('mousemove', drawing);
