@@ -3,7 +3,9 @@ const canvas = document.querySelector('#canvas'),
   fillColor = document.querySelector('#fill-color'),
   sizeSlider = document.querySelector('#size-slider'),
   colorBtns = document.querySelectorAll('.colors .option'),
-  colorPicker = document.querySelector('#color-picker');
+  colorPicker = document.querySelector('#color-picker'),
+  clearCanvas = document.querySelector('.clear-canvas'),
+  saveImageBtn = document.querySelector('.save-img');
 
 let ctx = canvas.getContext('2d'),
   isDrawing = false,
@@ -14,9 +16,16 @@ let ctx = canvas.getContext('2d'),
   prevMouseY,
   snapshot;
 
+const setCanvasBackground = () => {
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = selectedColor;
+};
+
 window.addEventListener('load', () => {
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
+  setCanvasBackground();
 });
 
 const startDraw = (e) => {
@@ -117,6 +126,18 @@ colorBtns.forEach((btn) => {
 colorPicker.addEventListener('change', () => {
   colorPicker.parentElement.style.background = colorPicker.value;
   colorPicker.parentElement.click();
+});
+
+clearCanvas.addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  setCanvasBackground();
+});
+
+saveImageBtn.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.download = `Asilbek-paint${Date.now()}.jpg`;
+  link.href = canvas.toDataURL('image/jpeg');
+  link.click();
 });
 
 const stopDraw = () => (isDrawing = false);
